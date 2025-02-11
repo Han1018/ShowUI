@@ -10,6 +10,7 @@ from tqdm import tqdm
 from pathlib import Path
 from PIL import Image, ImageDraw
 from data_utils import is_english_simple, bbox_2_point
+import pdb
 
 def is_english_simple(text):
     try:
@@ -44,7 +45,7 @@ def normalize_bbox(bbox, size):
     y2_norm = y2 / height
     return [x1_norm, y1_norm, x2_norm, y2_norm]
 
-dataset_dir = "/home/qinghong/data/GUI_database/AMEX/"
+dataset_dir = "./datasets/AMEX/"
 
 def main(split="name"):
     parser = argparse.ArgumentParser(description="Example of argparse usage.")

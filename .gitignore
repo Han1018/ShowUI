@@ -6,6 +6,7 @@ __pycache__/
 *.py[cod]
 venv/
 .env/
+data/template/__pycache__/*.pyc
 
 ## Uncleaned sections
 # Mind2Web
@@ -18,3 +19,7 @@ test_miniwob.py
 
 # Personal
 push.sh
+
+# AMEX
+datasets/AMEX/
+datasets/ShowUI-web/
