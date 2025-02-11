@@ -204,7 +204,7 @@ def validate_screenspot(val_loader, model_engine, processor, epoch, global_step,
             random.seed(123)  # Set the random seed to ensure reproducibility
             for split in results.keys():
                 for type in results[split].keys():
-                    samples = random.sample(results[split][type], 10)  # Sample 10 examples
+                    samples = random.sample(results[split][type], 3)  # Sample 10 examples
                     for sample in samples:
                         img_anno = sample['anno_id']
                         img_url = sample['img_path']
