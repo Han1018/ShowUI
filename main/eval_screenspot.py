@@ -124,8 +124,8 @@ def validate_screenspot(val_loader, model_engine, processor, epoch, global_step,
             generated_texts = processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
             meta = input_dict['meta_data'][0]
 
-            print(f"generated_texts: {generated_texts}")
-            print(f"answer: {meta['bbox']}")
+            # print(f"generated_texts: {generated_texts}")
+            # print(f"answer: {meta['bbox']}")
             pred_point = ast.literal_eval(generated_texts)
 
         except Exception as e:
