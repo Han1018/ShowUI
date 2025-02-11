@@ -550,6 +550,7 @@ def main(args):
         local_rank = args.local_rank
         model_engine = model_engine.to(f'cuda:{local_rank}')
         validate(val_loader, model_engine, processor, 0, 0, writer, args)
+        torch.cuda.empty_cache() # release cache
         exit()
 
     train_iter = iter(train_loader)
@@ -571,6 +572,7 @@ def main(args):
             score = validate(val_loader, model_engine, processor, epoch, global_step, writer, args)
             is_best = score > best_score
             best_score = max(score, best_score)
+            torch.cuda.empty_cache() # release cache
         else:
             is_best = True
             best_score = 0

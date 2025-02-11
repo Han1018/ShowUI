@@ -14,6 +14,7 @@ from data.dset_shared_navigation import NavigationDataset
 
 from transformers import AutoProcessor
 
+import pdb
 def collate_fn(batch, processor=None):
     batch_data_list = [x[0] for x in batch]
     input_ids, labels = tuple([instance[key] for instance in batch_data_list]
@@ -88,12 +89,14 @@ class HybridDataset(torch.utils.data.Dataset):
         self.json_list = [item for item in json_list.split(",") if item]
         sample_rate = np.array([float(x) for x in sample_rate.split(",")])
         self.sample_rate = sample_rate / sample_rate.sum()
+        # pdb.set_trace()
         
         self.samples_per_epoch = args.samples_per_epoch
         self.random_sample = args.random_sample
         self.record_sample = args.record_sample
         self.uniform_sample = args.uniform_sample
 
+        # pdb.set_trace()
         if self.inference:
             assert len(self.dset_list) == len(self.json_list) == 1
         else:
@@ -102,7 +105,7 @@ class HybridDataset(torch.utils.data.Dataset):
         self.all_datasets = []
         for dataset, json_split in zip(self.dset_list, self.json_list):
             # Grounding SFT
-            if dataset in ["showui","amex"]:
+            if dataset in ["showui","amex","web"]:
                 self.all_datasets.append(
                     GroundingDataset(
                         dataset_dir=args.dataset_dir,

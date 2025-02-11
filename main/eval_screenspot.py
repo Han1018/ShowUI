@@ -201,20 +201,22 @@ def validate_screenspot(val_loader, model_engine, processor, epoch, global_step,
 
         if media:
             images_list = []
+            random.seed(123)  # Set the random seed to ensure reproducibility
             for split in results.keys():
                 for type in results[split].keys():
-                    sample = random.choice(results[split][type])
-                    img_anno = sample['anno_id']
-                    img_url = sample['img_path']
-                    img_inst = sample['instruction']
-                    gt_bbox = sample['gt_bbox']
-                    if 'pred_point' in sample:
-                        pred_point = sample['pred_point']
-                        img_array = draw_point_bbox(img_url, pred_point, gt_bbox, radius=5, line=3)
-                    else:
-                        img_array = draw_point_bbox(img_url, None, gt_bbox)
-                    images = wandb.Image(img_array, caption=f"{split}/{type}/{img_anno}_{img_inst}")
-                    images_list.append(images)
+                    samples = random.sample(results[split][type], 10)  # Sample 10 examples
+                    for sample in samples:
+                        img_anno = sample['anno_id']
+                        img_url = sample['img_path']
+                        img_inst = sample['instruction']
+                        gt_bbox = sample['gt_bbox']
+                        if 'pred_point' in sample:
+                            pred_point = sample['pred_point']
+                            img_array = draw_point_bbox(img_url, pred_point, gt_bbox, radius=5, line=3)
+                        else:
+                            img_array = draw_point_bbox(img_url, None, gt_bbox)
+                        images = wandb.Image(img_array, caption=f"{split}/{type}/{img_anno}_{img_inst}")
+                        images_list.append(images)
             wandb.log({"examples": images_list}, step=global_step)
  
         save_json(results, os.path.join(args.tmp_dir, f'screenspot_epo{epoch}_tmp_dict.json'))
