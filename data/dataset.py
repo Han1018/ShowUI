@@ -105,7 +105,7 @@ class HybridDataset(torch.utils.data.Dataset):
         self.all_datasets = []
         for dataset, json_split in zip(self.dset_list, self.json_list):
             # Grounding SFT
-            if dataset in ["showui","amex","web"]:
+            if dataset in ["showui","amex","web","icon","icon_apple","icon_uitars", "web_omni"]:
                 self.all_datasets.append(
                     GroundingDataset(
                         dataset_dir=args.dataset_dir,

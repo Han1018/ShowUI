@@ -83,10 +83,12 @@ def main(split="name"):
 
         img_filename = image_id
         img_path = os.path.join(args.web_imgs, img_filename)
+        # pdb.set_trace()
         if not os.path.exists(img_path):
             continue
 
         image = Image.open(img_path)
+        # pdb.set_trace()
         if image is None:
             continue
 

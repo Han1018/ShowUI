@@ -200,12 +200,15 @@ def validate_screenspot(val_loader, model_engine, processor, epoch, global_step,
         wandb.log({"metrics/screenspot/Avg Success Rate": metric}, step=global_step)
 
         if media:
+            image_save_dir = os.path.join(args.tmp_dir, "images")
+            os.makedirs(image_save_dir, exist_ok=True)
             images_list = []
             random.seed(123)  # Set the random seed to ensure reproducibility
             for split in results.keys():
                 for type in results[split].keys():
-                    samples = random.sample(results[split][type], 3)  # Sample 10 examples
-                    for sample in samples:
+                    # samples = random.sample(results[split][type], 10)  # Sample 10 examples
+                    # for sample in samples:
+                    for sample in results[split][type]:
                         img_anno = sample['anno_id']
                         img_url = sample['img_path']
                         img_inst = sample['instruction']
@@ -215,9 +218,11 @@ def validate_screenspot(val_loader, model_engine, processor, epoch, global_step,
                             img_array = draw_point_bbox(img_url, pred_point, gt_bbox, radius=5, line=3)
                         else:
                             img_array = draw_point_bbox(img_url, None, gt_bbox)
-                        images = wandb.Image(img_array, caption=f"{split}/{type}/{img_anno}_{img_inst}")
-                        images_list.append(images)
-            wandb.log({"examples": images_list}, step=global_step)
+                        img = Image.fromarray(img_array)
+                        img.save(os.path.join(image_save_dir, f"example_{epoch}_{split}_{type}_{img_anno}.png"))
+                        # images = wandb.Image(img_array, caption=f"{split}/{type}/{img_anno}_{img_inst}")
+                        # images_list.append(images)
+            # wandb.log({"examples": images_list}, step=global_step)
  
         save_json(results, os.path.join(args.tmp_dir, f'screenspot_epo{epoch}_tmp_dict.json'))
         save_json(eval_dict, os.path.join(args.tmp_dir, f'screenspot_epo{epoch}_res_dict.json'))

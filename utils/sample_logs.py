@@ -40,8 +40,8 @@ def sample_icons_from_json(input_file, output_file):
 
 if __name__ == "__main__":
     # 設定輸入檔與輸出檔
-    input_json = "./logs/debug/2025-02-22_17-35-25/tmp/screenspot_filter_acc0.json"   # 請換成你的檔案路徑
-    output_json = "./logs/debug/2025-02-22_17-35-25/tmp/sample_10_failed_tasks.json" # 請換成你想輸出的檔案路徑
+    input_json = "/home/zonghan/Documents/thesis_research/os_agent/main_experiments/repos/ShowUI/logs/debug/2025-03-07_16-28-07/epo25_filter_0.json"   # 請換成你的檔案路徑
+    output_json = "/home/zonghan/Documents/thesis_research/os_agent/main_experiments/repos/ShowUI/logs/debug/2025-03-07_16-28-07/sample_10_failed_tasks.json" # 請換成你想輸出的檔案路徑
     
     sample_icons_from_json(input_json, output_json)
     print(f"抽樣完成，結果已寫入 {output_json}。")

@@ -12,9 +12,9 @@ def train(
     train_iter,
     args,
 ):
-    if args.global_rank == 0:
-        if not args.debug:
-            wandb.watch(model, log="all", log_freq=10)
+    # if args.global_rank == 0:
+    #     if not args.debug:
+    #         wandb.watch(model, log="all", log_freq=10)
 
     """Main training loop."""
     batch_time = AverageMeter("Batch time (s)", ":6.3f")

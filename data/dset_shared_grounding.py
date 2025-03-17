@@ -16,7 +16,11 @@ from data.template import grounding_to_qwen, batch_add_answer, batch_add_answer_
 dataset_mapping = {
     "showui": "ShowUI-desktop",
     "web": "ShowUI-web",
+    "web_omni": "ShowUI-web-omni-assisted",
     "amex": "AMEX",
+    "icon": "Icons_showui_prompt",
+    "icon_apple": "Icons_showui_prompt_apple",
+    "icon_uitars": "Icons_UITARS_prompt_qwen",
     "rico": "RICO",
     "ricosca": "RICO",
     "widget": "RICO",
